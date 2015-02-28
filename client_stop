@@ -1,0 +1,2 @@
+ps aux | grep Python | awk '{print $2}' | tail -1 | xargs kill
+ps aux | grep python | awk '{print $2}' | tail -1 | xargs kill

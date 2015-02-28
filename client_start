@@ -1,0 +1,2 @@
+python Laptop/client.py &
+/usr/bin/python Phone/client.py &

@@ -16,12 +16,27 @@ from Quartz.CoreGraphics import (
 
 class MouseEvent(object):
 
-    _act = lambda self, event_type, x, y: CGEventPost(kCGHIDEventTap, 
-        CGEventCreateMouseEvent(None, event_type, (x, y), kCGMouseButtonLeft))
+    def __init__(self, x=-1, y=-1):
+        self.x = x
+        self.y = y
 
-    move = lambda self, x, y: self._act(kCGEventMouseMoved, x, y)
+    def set(self, x, y):
+        self.x = x
+        self.y = y
 
-    click = lambda self, x, y: (self._act(kCGEventLeftMouseDown, x, y), self._act(kCGEventLeftMouseUp, x, y))
+    def _act(self, event_type, x=None, y=None):
+        if x is None:
+            x = self.x
+        if y is None:
+            y = self.y
+        CGEventPost(kCGHIDEventTap, 
+            CGEventCreateMouseEvent(None, event_type, (x, y), kCGMouseButtonLeft))
+
+    def move(self, x, y):
+        self._act(kCGEventMouseMoved, x, y)
+        self.set(x, y)
+
+    click = lambda self: (self._act(kCGEventLeftMouseDown), self._act(kCGEventLeftMouseUp))
 
 mouse = MouseEvent()
 
@@ -30,7 +45,7 @@ def on_message(ws, message):
     if event == 'move':
         mouse.move(float(x), float(y))
     else:
-        mouse.click(float(x), float(y))
+        mouse.click()
 
 def on_error(ws, error):
     print 'Connection error: {}'.format(error)

@@ -43,6 +43,8 @@ class ViewController: UIViewController, WebSocketDelegate {
         }
         sumX /= Double(touches.count)
         sumY /= Double(touches.count)
+        sumX *= (1280.0 / 375)
+        sumY *= (800.0 / 667)
         coordinates = String(format: "%d,%d,", Int(sumX), Int(sumY)) + eventType
         println(coordinates)
         socket.writeString(coordinates)
