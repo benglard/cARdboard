@@ -27,7 +27,7 @@ def on_open(ws):
 
 if __name__ == '__main__':
     #websocket.enableTrace(True)
-    ws = websocket.WebSocketApp('ws://localhost:8080/ws/606700/laptop',
+    ws = websocket.WebSocketApp('ws://ec2-52-11-8-41.us-west-2.compute.amazonaws.com:8080/ws/CCD1C1/laptop',
         on_message=on_message,
         on_error=on_error,
         on_close=on_close)
