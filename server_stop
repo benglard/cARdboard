@@ -1,0 +1,1 @@
+kill `ps h -o pid -C python | tail -2`

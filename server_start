@@ -1,0 +1,2 @@
+python Laptop/app.py &
+python Phone/app.py &

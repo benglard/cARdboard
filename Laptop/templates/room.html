@@ -24,6 +24,7 @@
           var img = document.getElementById("frame");
           img.src = 'data:image/png;base64,' + data.frame;
           img.onload = getFrame;
+          getFrame();
         } else if (data.msg === 'lj') {
           getFrame();
         } else {
