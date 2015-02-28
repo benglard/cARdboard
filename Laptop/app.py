@@ -34,6 +34,10 @@ class WebSocket(WebSocketHandler):
     def open(self, ws, ctype):
         print 'WebSocket connection to {}/{} opened from {}'.format(ws, ctype, self.request.remote_ip)
         if ws in connections:
+            for client, client_type in connections[ws].clients:
+                if client_type == 'browser' and ctype == 'laptop':
+                    client.write_message(json_encode({'msg': 'lj'}))
+
             connections[ws].clients.append((self, ctype))
         else:
             connections[ws] = Room(ws, [(self, ctype)])

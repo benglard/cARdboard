@@ -8,11 +8,13 @@
   <body>
     <img id="frame">
     <script type="text/javascript">
-      var ws = new WebSocket(location.href.replace('http', 'ws').replace('room', 'ws') + '/browser'), id;
+      var ws = new WebSocket(location.href.replace('http', 'ws').replace('room', 'ws') + '/browser');
+      var id;
 
       ws.onopen = function(event) {
         console.log('WebSocket connection OPENED');
-        id = setInterval(getFrame, 1000);
+        //getFrame();
+        //id = setInterval(getFrame, 2000);
       };
 
       ws.onmessage = function(msg) {
@@ -21,6 +23,9 @@
         if (data.msg === 'frame') {
           var img = document.getElementById("frame");
           img.src = 'data:image/png;base64,' + data.frame;
+          img.onload = getFrame;
+        } else if (data.msg === 'lj') {
+          getFrame();
         } else {
           console.log('unknown message', msg);
         }
@@ -28,7 +33,7 @@
 
       ws.onclose = function(event) {
         console.log('WebSocket connection CLOSED');
-        clearInterval(id);
+        //clearInterval(id);
       };
 
       ws.onerror = function(err) { 
