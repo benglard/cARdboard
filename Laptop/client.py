@@ -4,18 +4,21 @@ from tornado.escape import json_encode, json_decode
 def on_message(ws, message):
     data = json_decode(message)
     if data['msg'] == 'frame' and data['get']:
-        path = './static/test.png'
-        subprocess.call('screencapture {}'.format(path), shell=True)
-        img = cv2.imread(path)
-        img = cv2.resize(img, (640, 480))
-        code = cv2.imencode('.png', img)[1]
-        b64 = base64.encodestring(code)
-        rv = json_encode({
-            'msg': 'frame',
-            'frame': b64,
-            'get': False
-        })
-        ws.send(rv)
+        path = './Laptop/static/test.png'
+        try:
+            subprocess.call('screencapture {}'.format(path), shell=True)
+            img = cv2.imread(path)
+            img = cv2.resize(img, (640, 480))
+            code = cv2.imencode('.png', img)[1]
+            b64 = base64.encodestring(code)
+            rv = json_encode({
+                'msg': 'frame',
+                'frame': b64,
+                'get': False
+            })
+            ws.send(rv)
+        except:
+            pass
 
 def on_error(ws, error):
     print 'Connection error: {}'.format(error)

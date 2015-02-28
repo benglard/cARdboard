@@ -1,7 +1,7 @@
 # Thanks to http://stackoverflow.com/questions/281133/controlling-the-mouse-from-python-in-os-x
 # for inspiration
 
-import websocket
+import websocket, subprocess
 
 from Quartz.CoreGraphics import (
     CGEventCreateMouseEvent,
@@ -39,12 +39,29 @@ class MouseEvent(object):
     click = lambda self: (self._act(kCGEventLeftMouseDown), self._act(kCGEventLeftMouseUp))
 
 mouse = MouseEvent()
+past_img = None
 
 def on_message(ws, message):
-    x, y, event = message.split(',')
-    if event == 'move':
-        mouse.move(float(x), float(y))
-    else:
+    global past_img
+
+    event, data = message.split(',')
+    print event
+    if event == 'pic':
+        try:
+            if past_img:
+                cmd = """/opt/local/bin/python ./Phone/lib.py {} {}""".format(data, past_img)
+                out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+                coords = (out.communicate()[0]).replace('\n', '')
+                cx, cy = coords.split(',')
+                print cx, cy
+                mx = (1280.0 / 480) * float(cx)
+                my = (780.0 / 360) * float(cy)
+                mouse.move(mx, my)
+        except Exception, e:
+            print str(e)
+        past_img = data
+    elif event == 'tap':
+        print data
         mouse.click()
 
 def on_error(ws, error):
@@ -55,6 +72,7 @@ def on_close(ws):
 
 def on_open(ws):
     print 'Connection opened'
+    ws.send('lj')
 
 if __name__ == '__main__':
     #websocket.enableTrace(True)

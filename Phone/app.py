@@ -29,8 +29,9 @@ class WebSocket(WebSocketHandler):
 
     def on_message(self, msg):
         print 'Received message from {}'.format(self.request.remote_ip)
+        recip = 'app' if msg == 'lj' else 'laptop'
         for client, client_type in self.room.clients:
-            if client_type == 'laptop':
+            if client_type == recip:
                 client.write_message(msg)
 
     def on_close(self):
