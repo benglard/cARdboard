@@ -7,6 +7,7 @@ def on_message(ws, message):
         path = './static/test.png'
         subprocess.call('screencapture {}'.format(path), shell=True)
         img = cv2.imread(path)
+        img = cv2.resize(img, (640, 480))
         code = cv2.imencode('.png', img)[1]
         b64 = base64.encodestring(code)
         rv = json_encode({
