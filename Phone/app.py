@@ -4,8 +4,6 @@ from tornado.ioloop import IOLoop
 from tornado.web import Application
 from tornado.websocket import WebSocketHandler
 
-from lib import MouseEvent
-
 rel = lambda *x: os.path.abspath(os.path.join(os.path.dirname(__file__), *x))
 connections = {}
 
