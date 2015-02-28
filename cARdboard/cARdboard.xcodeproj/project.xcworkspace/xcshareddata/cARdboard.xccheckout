@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E38E8926-802C-49CE-A2F4-8211BC4DEB7C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>cARdboard</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5D33B4B5812F930507DEB59D09C404A4BEBB63DC</key>
+		<string>github.com:benglard/cARdboard.git</string>
+		<key>C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D</key>
+		<string>https://github.com/daltoniam/starscream</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>cARdboard/cARdboard.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5D33B4B5812F930507DEB59D09C404A4BEBB63DC</key>
+		<string>../../..</string>
+		<key>C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D</key>
+		<string>../../..cARdboard/libs/starscream/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:benglard/cARdboard.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5D33B4B5812F930507DEB59D09C404A4BEBB63DC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5D33B4B5812F930507DEB59D09C404A4BEBB63DC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Launch%20Hackathon</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>starscream</string>
+		</dict>
+	</array>
+</dict>
+</plist>
