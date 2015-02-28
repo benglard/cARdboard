@@ -8,10 +8,13 @@ from Quartz.CoreGraphics import (
     CGEventPost,
     kCGEventMouseMoved,
     kCGEventLeftMouseDown,
-    kCGEventLeftMouseDown,
     kCGEventLeftMouseUp,
     kCGMouseButtonLeft,
-    kCGHIDEventTap
+    kCGHIDEventTap,
+    CGEventSetIntegerValueField,
+    kCGMouseEventClickState,
+    CGEventSetType,
+    CFRelease
 )
 
 class MouseEvent(object):
@@ -38,6 +41,17 @@ class MouseEvent(object):
 
     click = lambda self: (self._act(kCGEventLeftMouseDown), self._act(kCGEventLeftMouseUp))
 
+    def double_click(self):
+        event = CGEventCreateMouseEvent(None, kCGEventLeftMouseDown, (self.x, self.y), kCGMouseButtonLeft)
+        CGEventSetIntegerValueField(event, kCGMouseEventClickState, 2)
+        CGEventPost(kCGHIDEventTap, event)
+        CGEventSetType(event, kCGEventLeftMouseUp)
+        CGEventPost(kCGHIDEventTap, event)
+        CGEventSetType(event, kCGEventLeftMouseDown)
+        CGEventPost(kCGHIDEventTap, event)
+        CGEventSetType(event, kCGEventLeftMouseUp)
+        CGEventPost(kCGHIDEventTap, event)
+
 mouse = MouseEvent()
 past_img = None
 
@@ -62,7 +76,10 @@ def on_message(ws, message):
         past_img = data
     elif event == 'tap':
         print data
-        mouse.click()
+        if data == 'tap':
+            mouse.click()
+        elif data == 'dtap':
+            mouse.double_click()
 
 def on_error(ws, error):
     print 'Connection error: {}'.format(error)
