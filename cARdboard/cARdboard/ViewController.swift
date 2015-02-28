@@ -116,7 +116,7 @@ class ViewController: UIViewController, WebSocketDelegate {
     }
     
     func takePicture() {
-        if !connected && laptopJoined {
+        if !(connected && laptopJoined) {
             return
         }
         

@@ -1,4 +1,4 @@
-# Thanks to http://stackoverflow.com/questions/8076889/tutorial-on-opencv-simpleblobdetector
+# Thanks to http://stackoverflow.com/questions/12943410/opencv-python-single-rather-than-multiple-blob-tracking
 # for inspiration
 
 import cv2
