@@ -11,11 +11,12 @@ import Starscream
 
 class ViewController: UIViewController, WebSocketDelegate {
     
-    var socket = WebSocket(url: NSURL(scheme: "ws", host: "localhost:8081", path: "/ws/test/app")!)
+    var socket = WebSocket(url: NSURL(scheme: "ws", host: "ec2-52-11-8-41.us-west-2.compute.amazonaws.com:8081", path: "/ws/test/app")!)
     var coordinates: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.multipleTouchEnabled = true
         socket.delegate = self
         socket.connect()
     }
@@ -29,11 +30,21 @@ class ViewController: UIViewController, WebSocketDelegate {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        let touch: AnyObject? = touches.anyObject()
-        let point = touch?.locationInView(self.view)
-        let x = Int((point?.x)!)
-        let y = Int((point?.y)!)
-        coordinates = String(format: "%d,%d", x, y)
+        // One touch: move
+        // Multitouch: click
+        
+        let eventType = touches.count == 1 ? "move" : "click"
+        var sumX = 0.0
+        var sumY = 0.0
+        for touch in touches {
+            let point = touch.locationInView(self.view)
+            sumX += Double(point.x)
+            sumY += Double(point.y)
+        }
+        sumX /= Double(touches.count)
+        sumY /= Double(touches.count)
+        coordinates = String(format: "%d,%d,", Int(sumX), Int(sumY)) + eventType
+        println(coordinates)
         socket.writeString(coordinates)
     }
     

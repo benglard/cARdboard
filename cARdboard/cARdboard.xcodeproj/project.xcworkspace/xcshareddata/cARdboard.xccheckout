@@ -22,7 +22,7 @@
 		<key>5D33B4B5812F930507DEB59D09C404A4BEBB63DC</key>
 		<string>../../..</string>
 		<key>C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D</key>
-		<string>../../..cARdboard/libs/starscream/</string>
+		<string>../../..cARdboard/libs/starscream</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:benglard/cARdboard.git</string>

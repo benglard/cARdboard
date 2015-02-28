@@ -8,7 +8,6 @@ from lib import MouseEvent
 
 rel = lambda *x: os.path.abspath(os.path.join(os.path.dirname(__file__), *x))
 connections = {}
-mouse = MouseEvent()
 
 class Room(object):
 
@@ -32,8 +31,9 @@ class WebSocket(WebSocketHandler):
 
     def on_message(self, msg):
         print 'Received message from {}'.format(self.request.remote_ip)
-        x, y = msg.split(',')
-        mouse.move(float(x), float(y))
+        for client, client_type in self.room.clients:
+            if client_type == 'laptop':
+                client.write_message(msg)
 
     def on_close(self):
         print 'Websocket connection closed'
